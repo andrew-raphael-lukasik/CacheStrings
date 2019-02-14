@@ -14,21 +14,19 @@ public class TestCacheIntString : MonoBehaviour
     public Text _displayMinutes;
     public Text _displayHours;
     public Text _displayDays;
-
     public double _time = 0;
-    CacheIntString cacheSeconds = new CacheIntString( (i) => ( i%60 ).ToString("00") , 0 , 59 );
-    CacheIntString cacheMinutes = new CacheIntString( (i) => ( i/60 ).ToString("00") , 0 , 59 );
-    CacheIntString cacheHours = new CacheIntString( (i) => ( i/(60*60) ).ToString("00") , 0 , 24 );
-    CacheIntString cacheDays = new CacheIntString( (i) => ( i/(60*60*24) ).ToString() , 0 , 31 );
-
+    CacheIntString cacheSeconds = new CacheIntString( (i)=>i%60 , (hash)=>hash.ToString("00") , 0 , 59 , 1 );
+    CacheIntString cacheMinutes = new CacheIntString( (i)=>i/60%60 , (hash)=>hash.ToString("00") , 0 , 60 , 60 );
+    CacheIntString cacheHours = new CacheIntString( (i)=>i/(60*60)%24 , (hash)=>hash.ToString("00") , 0 , 24 , 60*60 );
+    CacheIntString cacheDays = new CacheIntString( (i)=>i/(60*60*24) , (hash)=>hash.ToString() , 0 , 31 , 60*60*24 );
     void Update ()
     {
         _time += Time.deltaTime;
         int seconds = Mathf.FloorToInt( (float)_time );
-        _displaySeconds.text = cacheSeconds[ seconds%60 ];
-        _displayMinutes.text = cacheSeconds[ seconds/60 ];
-        _displayHours.text = cacheSeconds[ seconds/(60*60)%24 ];
-        _displayDays.text = cacheSeconds[ seconds/(60*60*24) ];
+        _displaySeconds.text = cacheSeconds[ seconds ];
+        _displayMinutes.text = cacheMinutes[ seconds ];
+        _displayHours.text = cacheHours[ seconds ];
+        _displayDays.text = cacheDays[ seconds ];
     }
 }
 ```
