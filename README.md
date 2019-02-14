@@ -15,10 +15,26 @@ public class TestCacheIntString : MonoBehaviour
     public Text _displayHours;
     public Text _displayDays;
     public double _time = 0;
-    CacheIntString cacheSeconds = new CacheIntString( (i)=>i%60 , (hash)=>hash.ToString("00") , 0 , 59 , 1 );
-    CacheIntString cacheMinutes = new CacheIntString( (i)=>i/60%60 , (hash)=>hash.ToString("00") , 0 , 60 , 60 );
-    CacheIntString cacheHours = new CacheIntString( (i)=>i/(60*60)%24 , (hash)=>hash.ToString("00") , 0 , 24 , 60*60 );
-    CacheIntString cacheDays = new CacheIntString( (i)=>i/(60*60*24) , (hash)=>hash.ToString() , 0 , 31 , 60*60*24 );
+    CacheIntString cacheSeconds = new CacheIntString(
+        (i)=>i%60 , //you describe how input seconds (key) will be translated to useful value (hash)
+        (hash)=>hash.ToString("00") //you describe how string is built based on given value (hash)
+        , 0 , 59 , 1 //initialization range and step, so cache will be warmed up and ready
+    );
+    CacheIntString cacheMinutes = new CacheIntString(
+        (i)=>i/60%60 , // this translates input seconds to minutes
+        (hash)=>hash.ToString("00") // this translates minute to string
+        , 0 , 60 , 60 //minutes needs a step of 60 seconds
+    );
+    CacheIntString cacheHours = new CacheIntString(
+        (i)=>i/(60*60)%24 , // this translates input seconds to hours
+        (hash)=>hash.ToString("00") , // this translates hour to string
+        0 , 24 , 60*60 //hours needs a step of 60*60 seconds
+    );
+    CacheIntString cacheDays = new CacheIntString(
+        (i)=>i/(60*60*24) , // this translates input seconds to days
+        (hash)=>hash.ToString() , // this translates day to string
+        0 , 31 , 60*60*24 //days needs a step of 60*60*24 seconds
+    );
     void Update ()
     {
         _time += Time.deltaTime;
