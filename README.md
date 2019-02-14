@@ -30,5 +30,6 @@ public class TestCacheIntString : MonoBehaviour
         _displayHours.text = cacheSeconds[ seconds/(60*60)%24 ];
         _displayDays.text = cacheSeconds[ seconds/(60*60*24) ];
     }
+}
 ```
 #
