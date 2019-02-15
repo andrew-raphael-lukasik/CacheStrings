@@ -46,7 +46,7 @@ public sealed class CacheIntString : CacheStrings<int,int>
 		int initMax ,
 		int initStep
 	)
-		: base( hashFunction , hashToString , initMax-initMin )
+		: base( hashFunction , hashToString , (initMax-initMin)/initStep )
 	{
 		for( int key=initMin ; key<=initMax ; key+=initStep )
 		{
@@ -69,7 +69,7 @@ public sealed class CacheUIntString : CacheStrings<uint,uint>
 		uint initMax ,
 		uint initStep
 	)
-		: base( hashFunction , hashToString , Convert.ToInt32(initMax-initMin) )
+		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
 	{
 		for( uint key=initMin ; key<=initMax ; key+=initStep )
 		{
@@ -92,7 +92,7 @@ public sealed class CacheULongString : CacheStrings<ulong,ulong>
 		ulong initMax ,
 		ulong initStep
 	)
-		: base( hashFunction , hashToString , Convert.ToInt32(initMax-initMin) )
+		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
 	{
 		for( ulong key=initMin ; key<=initMax ; key+=initStep )
 		{
@@ -115,7 +115,7 @@ public sealed class CacheDoubleString : CacheStrings<double,double>
 		double initMax ,
 		double initStep
 	)
-		: base( hashFunction , hashToString , Convert.ToInt32(initMax-initMin) )
+		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
 	{
 		for( double key=initMin ; key<=initMax ; key+=initStep )
 		{
