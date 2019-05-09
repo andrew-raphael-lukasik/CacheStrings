@@ -1,5 +1,5 @@
 # CacheStrings
-Specialized <hash,string> storage to ease your fight with all those UI-related memory leaks and GC bumps. You provide hash function, string-formatting method - all in one place (constructor call) - and the rest will be taken care of.
+Specialized generic hashtable to ease your fight with all those UI-related memory leaks and GC bumps. You provide hash function, string-formatting method - all in one place (constructor call) - and the rest will be taken care of.
 #
 Use cases:
 - Timers (!)
