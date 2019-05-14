@@ -15,6 +15,7 @@ public class TestCacheIntString : MonoBehaviour
     public Text _displayMinutes;
     public Text _displayHours;
     public Text _displayDays;
+    public Text _displayMilliSeconds;
     public double _time = 0;
     CacheIntString cacheSeconds = new CacheIntString(
         (seconds)=>seconds%60 , //describe how seconds (key) will be translated to useful value (hash)
@@ -36,6 +37,11 @@ public class TestCacheIntString : MonoBehaviour
         (day)=>day.ToString() , // this translates day to string
         0 , 31 , 60*60*24 //days needs a step of 60*60*24 seconds
     );
+    CacheDoubleString cacheMilliSeconds = new CacheDoubleString(
+        (seconds)=>seconds%1*1000 , //extract 3 decimal places
+        (second)=>second.ToString("000")
+        , 0 , 0.999 , 0.001 //1ms step
+    );
     void Update ()
     {
         _time += Time.deltaTime;
@@ -44,6 +50,7 @@ public class TestCacheIntString : MonoBehaviour
         _displayMinutes.text = cacheMinutes[ seconds ];
         _displayHours.text = cacheHours[ seconds ];
         _displayDays.text = cacheDays[ seconds ];
+        _displayMilliSeconds.text = cacheMilliSeconds[ _time ];
     }
 }
 ```
