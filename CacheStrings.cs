@@ -127,3 +127,26 @@ public sealed class CacheDoubleString : CacheStrings<double,double>
 		}
 	}
 }
+
+public sealed class CacheDoubleIntString : CacheStrings<double,int>
+{
+	public CacheDoubleIntString
+	(
+		Func<double,int> hashFunction ,
+		Func<int,string> hashToString ,
+		double initMin ,
+		double initMax ,
+		double initStep
+	)
+		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
+	{
+		for( double key=initMin ; key<=initMax ; key+=initStep )
+		{
+			int hash = hashFunction( key );
+			string str = hashToString( hash );
+			UnityEngine.Assertions.Assert.IsNotNull( str );
+			if( _table.ContainsKey( hash )==false ) _table.Add( hash , str );
+			else Debug.LogWarning( $"Redundant key: { key }, where hash: { hash }" );
+		}
+	}
+}
