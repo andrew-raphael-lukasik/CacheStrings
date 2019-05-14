@@ -37,10 +37,10 @@ public class TestCacheIntString : MonoBehaviour
         (day)=>day.ToString() , // this translates day to string
         0 , 31 , 60*60*24 //days needs a step of 60*60*24 seconds
     );
-    CacheDoubleString cacheMilliSeconds = new CacheDoubleString(
-        (seconds)=>seconds%1*1000 , //extract 3 decimal places
+    CacheDoubleIntString cacheMilliSeconds = new CacheDoubleIntString(
+        (seconds)=>(int)System.Math.Round(seconds%1d*1000d) , //extract 3 decimal places
         (second)=>second.ToString("000")
-        , 0 , 0.999 , 0.001 //1ms step
+        , 0d , 0.999d , 0.001d //1ms step
     );
     void Update ()
     {
