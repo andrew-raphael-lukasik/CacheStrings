@@ -46,8 +46,9 @@ public sealed class CacheIntString : CacheStrings<int,int>
 		int initMax ,
 		int initStep
 	)
-		: base( hashFunction , hashToString , (initMax-initMin)/initStep )
+		: base( hashFunction , hashToString , initStep!=0 ? (initMax-initMin)/initStep : 0 )
 	{
+		if( initStep!=0 )
 		for( int key=initMin ; key<=initMax ; key+=initStep )
 		{
 			int hash = hashFunction( key );
@@ -69,8 +70,9 @@ public sealed class CacheUIntString : CacheStrings<uint,uint>
 		uint initMax ,
 		uint initStep
 	)
-		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
+		: base( hashFunction , hashToString , Convert.ToInt32(initStep!=0 ? (initMax-initMin)/initStep : 0) )
 	{
+		if( initStep!=0 )
 		for( uint key=initMin ; key<=initMax ; key+=initStep )
 		{
 			uint hash = hashFunction( key );
@@ -92,8 +94,9 @@ public sealed class CacheULongString : CacheStrings<ulong,ulong>
 		ulong initMax ,
 		ulong initStep
 	)
-		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
+		: base( hashFunction , hashToString , Convert.ToInt32(initStep!=0 ? (initMax-initMin)/initStep : 0) )
 	{
+		if( initStep!=0 )
 		for( ulong key=initMin ; key<=initMax ; key+=initStep )
 		{
 			ulong hash = hashFunction( key );
@@ -115,8 +118,9 @@ public sealed class CacheDoubleString : CacheStrings<double,double>
 		double initMax ,
 		double initStep
 	)
-		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
+		: base( hashFunction , hashToString , Convert.ToInt32(initStep!=0 ? (initMax-initMin)/initStep : 0) )
 	{
+		if( initStep!=0 )
 		for( double key=initMin ; key<=initMax ; key+=initStep )
 		{
 			double hash = hashFunction( key );
@@ -138,8 +142,9 @@ public sealed class CacheDoubleIntString : CacheStrings<double,int>
 		double initMax ,
 		double initStep
 	)
-		: base( hashFunction , hashToString , Convert.ToInt32((initMax-initMin)/initStep) )
+		: base( hashFunction , hashToString , Convert.ToInt32(initStep!=0 ? (initMax-initMin)/initStep : 0) )
 	{
+		if( initStep!=0 )
 		for( double key=initMin ; key<=initMax ; key+=initStep )
 		{
 			int hash = hashFunction( key );
