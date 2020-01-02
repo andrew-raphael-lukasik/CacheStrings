@@ -1,8 +1,9 @@
-/// <summary> Most basic/approachable way of string caching </summary>
-// create example:
+// creation:
 // public static LazyCacheStrings<int> MyIntStrings = new LazyCacheStrings<int>( (t)=>t.ToString() );
-// usage example:
+// usage:
 // string myString = MyIntStrings[ someIntVariable ];
+
+/// <summary> Most basic/approachable/triage way of string caching. </summary>
 public class LazyCacheStrings <T>
 {
 
