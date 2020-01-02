@@ -1,13 +1,13 @@
 /// <summary> Most basic/approachable way of string caching </summary>
 // create example:
-// public static LazyStringCache<int> MyIntStrings = new LazyStringCache<int>( (t)=>t.ToString() );
+// public static LazyCacheStrings<int> MyIntStrings = new LazyCacheStrings<int>( (t)=>t.ToString() );
 // usage example:
 // string myString = MyIntStrings[ someIntVariable ];
-public class LazyStringCache <T>
+public class LazyCacheStrings <T>
 {
 	System.Collections.Generic.Dictionary<T,string> _lookup;
 	System.Func<T,string> _toString;
-	public LazyStringCache ( System.Func<T,string> toString ) { this._toString = toString; }
+	public LazyCacheStrings ( System.Func<T,string> toString ) { this._toString = toString; }
 	public string this [ T key ]
 	{
 		get
