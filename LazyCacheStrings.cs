@@ -5,9 +5,16 @@
 // string myString = MyIntStrings[ someIntVariable ];
 public class LazyCacheStrings <T>
 {
-	System.Collections.Generic.Dictionary<T,string> _lookup = new System.Collections.Generic.Dictionary<T,string>(100);
-	System.Func<T,string> _toString;
-	public LazyCacheStrings ( System.Func<T,string> toString ) { this._toString = toString; }
+
+	System.Collections.Generic.Dictionary<T,string> _lookup;
+	readonly System.Func<T,string> _toString;
+	
+	public LazyCacheStrings ( System.Func<T,string> toString , int initialCapacity = 1000 )
+	{
+		this._toString = toString;
+		this._lookup = new System.Collections.Generic.Dictionary<T,string>( initialCapacity );
+	}
+	
 	public string this [ T key ]
 	{
 		get
@@ -20,5 +27,7 @@ public class LazyCacheStrings <T>
 			return result;
 		}
 	}
+	
 	public void Clear () { _lookup.Clear(); }
+	
 }
