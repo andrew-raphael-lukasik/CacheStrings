@@ -5,7 +5,7 @@
 // string myString = MyIntStrings[ someIntVariable ];
 public class LazyCacheStrings <T>
 {
-	System.Collections.Generic.Dictionary<T,string> _lookup;
+	System.Collections.Generic.Dictionary<T,string> _lookup = new System.Collections.Generic.Dictionary<T,string>(100);
 	System.Func<T,string> _toString;
 	public LazyCacheStrings ( System.Func<T,string> toString ) { this._toString = toString; }
 	public string this [ T key ]
