@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Debug = UnityEngine.Debug;
+using Assert = UnityEngine.Assertions.Assert;
 
 public class CacheStrings <KEY,HASH>
 {
@@ -11,8 +12,8 @@ public class CacheStrings <KEY,HASH>
 	public CacheStrings ( Func<KEY,HASH> hashFunction , Func<HASH,string> hashToString  ) : this( hashFunction , hashToString , 100 ) {}
 	public CacheStrings ( Func<KEY,HASH> hashFunction , Func<HASH,string> hashToString , int initialDictCapacity )
 	{
-		UnityEngine.Assertions.Assert.IsNotNull( hashFunction );
-		UnityEngine.Assertions.Assert.IsNotNull( hashToString );
+		Assert.IsNotNull( hashFunction );
+		Assert.IsNotNull( hashToString );
 		_table = new Dictionary<HASH,string>( initialDictCapacity );
 		_hashFunction = hashFunction;
 		_hashToString = hashToString;
@@ -27,7 +28,7 @@ public class CacheStrings <KEY,HASH>
 			if( _table.TryGetValue( hash , out result )==false )//fail safe
 			{
 				result = _hashToString( hash );
-				UnityEngine.Assertions.Assert.IsNotNull( result );
+				Assert.IsNotNull( result );
 				_table.Add( hash , result );
 			}
 			return result;
@@ -53,7 +54,7 @@ public sealed class CacheIntString : CacheStrings<int,int>
 		{
 			int hash = hashFunction( key );
 			string str = hashToString( hash );
-			UnityEngine.Assertions.Assert.IsNotNull( str );
+			Assert.IsNotNull( str );
 			if( _table.ContainsKey( hash )==false ) _table.Add( hash , str );
 			else Debug.LogWarning( $"Redundant key: { key }, where hash: { hash }" );
 		}
@@ -77,7 +78,7 @@ public sealed class CacheUIntString : CacheStrings<uint,uint>
 		{
 			uint hash = hashFunction( key );
 			string str = hashToString( hash );
-			UnityEngine.Assertions.Assert.IsNotNull( str );
+			Assert.IsNotNull( str );
 			if( _table.ContainsKey( hash )==false ) _table.Add( hash , str );
 			else Debug.LogWarning( $"Redundant key: { key }, where hash: { hash }" );
 		}
@@ -101,7 +102,7 @@ public sealed class CacheULongString : CacheStrings<ulong,ulong>
 		{
 			ulong hash = hashFunction( key );
 			string str = hashToString( hash );
-			UnityEngine.Assertions.Assert.IsNotNull( str );
+			Assert.IsNotNull( str );
 			if( _table.ContainsKey( hash )==false ) _table.Add( hash , str );
 			else Debug.LogWarning( $"Redundant key: { key }, where hash: { hash }" );
 		}
@@ -125,7 +126,7 @@ public sealed class CacheDoubleString : CacheStrings<double,double>
 		{
 			double hash = hashFunction( key );
 			string str = hashToString( hash );
-			UnityEngine.Assertions.Assert.IsNotNull( str );
+			Assert.IsNotNull( str );
 			if( _table.ContainsKey( hash )==false ) _table.Add( hash , str );
 			else Debug.LogWarning( $"Redundant key: { key }, where hash: { hash }" );
 		}
@@ -149,7 +150,7 @@ public sealed class CacheDoubleIntString : CacheStrings<double,int>
 		{
 			int hash = hashFunction( key );
 			string str = hashToString( hash );
-			UnityEngine.Assertions.Assert.IsNotNull( str );
+			Assert.IsNotNull( str );
 			if( _table.ContainsKey( hash )==false ) _table.Add( hash , str );
 			else Debug.LogWarning( $"Redundant key: { key }, where hash: { hash }" );
 		}
