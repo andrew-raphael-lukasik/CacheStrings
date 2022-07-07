@@ -8,7 +8,8 @@ Use cases:
 - Any kind of UI fields where number of variants is limited & those can be pre-generated procedurally
 
 # How does it work?
-You provide a hash function and a string-formatting method - all in a constructor call during field initialization.
+You provide a hash function and a string formatting method - all in a constructor call during field initialization. This will generate all the variants.
+Once you want to use you just lookup ready-made strings with index operator `cache[key]`
 
 Core data internally:
 ```C#
