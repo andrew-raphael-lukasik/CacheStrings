@@ -13,8 +13,8 @@ You provide a hash function and a string-formatting method - all in a constructo
 Core data internally:
 ```C#
 Dictionary<HASH,string> table;
-Func<HASH,string> hashToString;// id to string
-Func<KEY,HASH> hashFunction;// tick to hash/id (key can just be id)
+Func<HASH,string> hashToString;
+Func<KEY,HASH> hashFunction;
 ```
 # How to use it?
 ```C#
