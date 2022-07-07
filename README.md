@@ -11,7 +11,7 @@ Use cases:
 You provide a hash function and a string formatting method - all in a constructor call during field initialization. This will generate all the variants.
 Once you want to use you just lookup ready-made strings with index operator `text = cache[key]`
 
-Core data internally:
+It is basically this, but encapsulated in a class:
 ```C#
 Dictionary<HASH,string> table;
 Func<HASH,string> hashToString;
