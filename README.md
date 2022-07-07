@@ -1,10 +1,22 @@
 # CacheStrings
-Specialized generic hashtable to ease your fight with all those UI-related (quasi) memory leaks and GC bumps. You provide hash function, string-formatting method - all in one place (constructor call) - and the rest will be taken care of.
-#
+Will help you fix all those pesky UI-related wasteful allocations and GC bumps - hardly noticeable on PC but costly for mobile VR.
+
+How? Pre-generate all the string variants **once** and replace those allocations with a dictionary lookup. Constant cost, GC bumps are gone; problem solved.
+
 Use cases:
 - Timers (!)
-- Any kind of number UI fields where strings repeat (eventually) and pool size can be imagined as limited
-#
+- Any kind of UI fields where number of variants is limited & those can be pre-generated procedurally
+
+# How does it work?
+You provide a hash function and a string-formatting method - all in a constructor call during field initialization.
+
+Core data internally:
+```C#
+Dictionary<HASH,string> table;
+Func<HASH,string> hashToString;// id to string
+Func<KEY,HASH> hashFunction;// tick to hash/id (key can just be id)
+```
+# How to use it?
 ```C#
 using System;
 using UnityEngine;
