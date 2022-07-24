@@ -1,5 +1,5 @@
 # CacheStrings
-Will help you fix all those UI-related wasteful allocations and GC bumps - hardly noticeable on PC but costly for mobile VR.
+Will help you fix all those UI-related wasteful allocations and GC bumps - hardly noticeable on PC but costly for mobile VR/AR/XR.
 
 How? Pre-generate all the string variants **once** and replace runtime allocations with a dictionary lookup. Constant cost, GC bumps are gone; problem solved.
 
