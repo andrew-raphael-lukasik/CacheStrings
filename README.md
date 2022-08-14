@@ -1,7 +1,7 @@
 # CacheStrings
 Will help you fix all those UI-related wasteful allocations and GC bumps - hardly noticeable on PC but costly for mobile VR/AR/XR.
 
-How? Pre-generate all the string variants **once** and replace runtime allocations with a dictionary lookup. Constant cost, GC bumps are gone; problem solved.
+How? Pre-generate all the string variants **once** and replace runtime allocations with a single dictionary lookup. Constant cost, GC bumps are gone; problem solved.
 
 Use cases:
 - Timers (!)
@@ -9,9 +9,9 @@ Use cases:
 
 # How does it work?
 You provide a hash function and a string formatting method - all in a constructor call during field initialization. This will generate all the variants.
-Once you want to use you just lookup ready-made strings with index operator `text = cache[key]`
+Once you want to get a string use index operator `text = cache[key]`
 
-It is basically this, but encapsulated in a class:
+Whole idea is basically this, but encapsulated in a class:
 ```C#
 Dictionary<HASH,string> table;
 Func<HASH,string> hashToString;
